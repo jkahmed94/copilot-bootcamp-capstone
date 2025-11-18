@@ -14,6 +14,9 @@
             <p class="subtitle">Transform your emails instantly with the perfect tone</p>
         </header>
 
+        <!-- Error Message -->
+        <div id="errorMessage" class="error-message" style="display: none;"></div>
+
         <!-- Main Content -->
         <main>
             <!-- Input Section -->
@@ -23,10 +26,7 @@
                 </label>
                 <textarea 
                     id="emailText" 
-                    placeholder="Enter your email text here... 
-
-For example:
-'I need the report by tomorrow. Can you send it to me?'"
+                    placeholder="Enter your email text here..."
                     rows="8"
                 ></textarea>
 
@@ -62,11 +62,6 @@ For example:
                         <p class="hint">Enter your text above and select a tone to get started</p>
                     </div>
                 </div>
-
-                <!-- Copy Button (hidden initially) -->
-                <button id="copyButton" class="copy-btn" style="display: none;">
-                    📋 Copy to Clipboard
-                </button>
             </div>
 
             <!-- Loading Indicator -->
@@ -74,9 +69,6 @@ For example:
                 <div class="spinner"></div>
                 <p>Rewriting your email...</p>
             </div>
-
-            <!-- Error Message -->
-            <div id="errorMessage" class="error-message" style="display: none;"></div>
         </main>
 
         <!-- Footer -->
