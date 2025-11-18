@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Rewriter by Tone</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header>
+            <h1>✉️ Email Rewriter by Tone</h1>
+            <p class="subtitle">Transform your emails instantly with the perfect tone</p>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Input Section -->
+            <div class="input-section">
+                <label for="emailText">
+                    <strong>Your Original Email:</strong>
+                </label>
+                <textarea 
+                    id="emailText" 
+                    placeholder="Enter your email text here... 
+
+For example:
+'I need the report by tomorrow. Can you send it to me?'"
+                    rows="8"
+                ></textarea>
+
+                <!-- Tone Selection and Action Button -->
+                <div class="controls">
+                    <div class="tone-selector">
+                        <label for="toneDropdown">
+                            <strong>Select Tone:</strong>
+                        </label>
+                        <select id="toneDropdown">
+                            <option value="">-- Choose a tone --</option>
+                            <option value="friendly">😊 Friendly - Warm and approachable</option>
+                            <option value="professional">💼 Professional - Formal and polished</option>
+                            <option value="assertive">💪 Assertive - Direct and confident</option>
+                        </select>
+                    </div>
+
+                    <button id="rewriteButton" class="rewrite-btn">
+                        <span class="btn-icon">🔄</span>
+                        Rewrite Email
+                    </button>
+                </div>
+            </div>
+
+            <!-- Output Section -->
+            <div class="output-section">
+                <label for="output">
+                    <strong>Rewritten Email:</strong>
+                </label>
+                <div id="output" class="output-box">
+                    <div class="placeholder-text">
+                        <p>👆 Your rewritten email will appear here</p>
+                        <p class="hint">Enter your text above and select a tone to get started</p>
+                    </div>
+                </div>
+
+                <!-- Copy Button (hidden initially) -->
+                <button id="copyButton" class="copy-btn" style="display: none;">
+                    📋 Copy to Clipboard
+                </button>
+            </div>
+
+            <!-- Loading Indicator -->
+            <div id="loadingIndicator" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>Rewriting your email...</p>
+            </div>
+
+            <!-- Error Message -->
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <p>💡 Tip: The tone you choose will transform your message to match the desired communication style</p>
+        </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
