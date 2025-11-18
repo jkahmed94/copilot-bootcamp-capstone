@@ -2,9 +2,9 @@
   "name": "copilot-bootcamp-capstone",
   "version": "1.0.0",
   "description": "Email Rewriter by Tone - A web app to rewrite emails in different tones",
-  "main": "server.js",
+  "main": "backend/src/server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node backend/src/server.js",
     "test": "jest"
   },
   "keywords": [],
