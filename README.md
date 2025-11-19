@@ -40,6 +40,6 @@ npm test   # Run tests
 
 1. User inputs email + selects tone
 2. Frontend POST to `/rewrite`
-3. Backend sends to GPT-4o with tone prompt
+3. Backend sends to GPT-4o-mini with tone prompt
 4. AI rewrites, returns result
 5. Display rewritten email

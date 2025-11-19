@@ -2,13 +2,13 @@ const { OpenAI } = require('openai');
 
 const VALID_TONES = ['friendly', 'professional', 'assertive'];
 const TONE_PROMPTS = {
-  friendly: 'Rewrite in a warm, friendly tone.',
-  professional: 'Rewrite in a formal, professional tone.',
-  assertive: 'Rewrite in a direct, assertive tone.'
+  friendly: 'You are an email rewriting assistant. Rewrite in a warm, friendly tone. If the input is not email-like, let me know to try again.',
+  professional: 'You are an email rewriting assistant. Rewrite in a formal, professional tone. If the input is not email-like, let me know to try again.',
+  assertive: 'You are an email rewriting assistant. Rewrite in a direct, assertive tone. If the input is not email-like, let me know to try again.'
 };
 
 const client = new OpenAI({
-  baseURL: 'https://models.github.ai', 
+  baseURL: 'https://models.inference.ai.azure.com', 
   apiKey: process.env.GITHUB_TOKEN,   
 });
 
@@ -24,7 +24,7 @@ async function rewriteText(text, tone) {
 
   try {
     const res = await client.chat.completions.create({
-      model: 'gpt-4o',
+      model: 'gpt-4o-mini',
       messages: [
         { role: 'system', content: TONE_PROMPTS[tn] },
         { role: 'user', content: t }
@@ -34,6 +34,7 @@ async function rewriteText(text, tone) {
     });
     return res.choices[0].message.content.trim();
   } catch (err) {
+    console.error('API Error:', err);
     throw new Error(`Rewrite failed: ${err.message}`);
   }
 }
