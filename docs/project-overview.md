@@ -2,9 +2,11 @@
 
 ## Introduction
 
-Email Rewriter by Tone is a web application that transforms email content to match different communication styles. Choose from three tones (Friendly 😊, Professional 💼, Assertive 💪) to craft the perfect message.
 
-The current MVP includes a fully functional UI with validation, error handling, and complete test coverage. AI integration is planned for post-MVP.
+Email Rewriter by Tone is a web application that transforms email content to match different communication styles. Choose from several tones (Friendly 😊, Professional 💼, Assertive 💪, Casual 🧢, Formal 🏛️, Empathetic 🤝, Persuasive 🗣️) to craft the perfect message.
+
+
+The current MVP includes a fully functional UI with validation, error handling, and complete test coverage. The backend and frontend support multiple tone options. AI integration is planned for post-MVP.
 
 ## Architecture
 
