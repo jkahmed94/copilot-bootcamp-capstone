@@ -1,78 +1,69 @@
-const mockCreate = jest.fn();
-
-jest.mock('openai', () => ({
-  OpenAI: jest.fn(() => ({
-    chat: { completions: { create: mockCreate } }
-  }))
-}));
 
 const { rewriteText } = require('../src/rewriter');
 
-describe('Email Rewriter', () => {
-  beforeEach(() => {
-    process.env.GITHUB_TOKEN = 'test-token';
-    mockCreate.mockClear();
-  });
-
+describe('Email Rewriter MVP', () => {
   describe('Validation', () => {
-    const cases = [
-      ['', 'friendly'], ['   ', 'friendly'], [null, 'friendly'], [123, 'friendly'],
-      ['Hello', ''], ['Hello', null], ['Hello', 'angry']
+    const invalidCases = [
+      ['', 'friendly'],
+      ['   ', 'friendly'],
+      [null, 'friendly'],
+      [123, 'friendly'],
+      ['Hello', ''],
+      ['Hello', null],
+      ['Hello', 'angry'],
+      ['Hello', '123'],
+      ['Hello', undefined],
+      [undefined, 'friendly'],
+      [{}, 'friendly'],
+      ['Hello', {}],
     ];
 
-    cases.forEach(([text, tone]) => {
-      test(`rejects invalid input`, async () => {
+    invalidCases.forEach(([text, tone]) => {
+      test(`rejects invalid input: text=${JSON.stringify(text)}, tone=${JSON.stringify(tone)}`, async () => {
         await expect(rewriteText(text, tone)).rejects.toThrow();
       });
     });
 
-    test('rejects missing token', async () => {
-      delete process.env.GITHUB_TOKEN;
-      await expect(rewriteText('Hello', 'friendly')).rejects.toThrow('token');
+    test('throws correct error for missing text', async () => {
+      await expect(rewriteText('', 'friendly')).rejects.toThrow('Text required');
     });
 
-    test('rejects placeholder token', async () => {
-      process.env.GITHUB_TOKEN = 'your_github_token_here';
-      await expect(rewriteText('Hello', 'friendly')).rejects.toThrow('token');
+    test('throws correct error for invalid tone', async () => {
+      await expect(rewriteText('Hello', 'angry')).rejects.toThrow('Invalid tone');
     });
   });
 
-  describe('API Integration', () => {
-    ['friendly', 'professional', 'assertive'].forEach(tone => {
-      test(`calls API with ${tone} tone`, async () => {
-        mockCreate.mockResolvedValue({ choices: [{ message: { content: 'Result' } }] });
-        await rewriteText('Test', tone);
-        expect(mockCreate).toHaveBeenCalledWith(expect.objectContaining({
-          model: 'gpt-4o',
-          messages: expect.arrayContaining([expect.objectContaining({ role: 'system' })])
-        }));
+  describe('Placeholder Response', () => {
+    const validTones = [
+      'friendly',
+      'professional',
+      'assertive',
+      'casual',
+      'formal',
+      'empathetic',
+      'persuasive'
+    ];
+
+    validTones.forEach(tone => {
+      test(`returns placeholder for ${tone} tone`, async () => {
+        const result = await rewriteText('Test email', tone);
+        expect(result).toContain('AI is not integrated yet');
       });
     });
 
     test('handles case insensitive tone', async () => {
-      mockCreate.mockResolvedValue({ choices: [{ message: { content: 'Result' } }] });
-      await rewriteText('Test', 'FRIENDLY');
-      expect(mockCreate).toHaveBeenCalled();
+      const result = await rewriteText('Test', 'FRIENDLY');
+      expect(result).toContain('AI is not integrated yet');
     });
 
-    test('trims whitespace from response', async () => {
-      mockCreate.mockResolvedValue({ choices: [{ message: { content: '  Result  ' } }] });
-      const result = await rewriteText('Test', 'friendly');
-      expect(result).toBe('Result');
+    test('trims whitespace from tone', async () => {
+      const result = await rewriteText('Test', '  friendly  ');
+      expect(result).toContain('AI is not integrated yet');
     });
-  });
 
-  describe('Error Handling', () => {
-    test('handles API errors', async () => {
-      mockCreate.mockRejectedValue(new Error('API error'));
-      await expect(rewriteText('Test', 'friendly')).rejects.toThrow();
-    });
-  });
-
-  describe('Edge Cases', () => {
-    test('trims whitespace', async () => {
-      mockCreate.mockResolvedValue({ choices: [{ message: { content: '  Result  ' } }] });
-      expect(await rewriteText('Test', 'friendly')).toBe('Result');
+    test('trims whitespace from text', async () => {
+      const result = await rewriteText('   Test   ', 'friendly');
+      expect(result).toContain('AI is not integrated yet');
     });
   });
 });

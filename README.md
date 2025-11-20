@@ -1,12 +1,14 @@
 # Email Rewriter by Tone 📧
 
-AI-powered email rewriting using GitHub Models (GPT-4o).
+> Built with GitHub Copilot
+
+Email rewriting application with tone selection (MVP: placeholder implementation, AI integration planned for Post-MVP).
 
 ## Features
 
 - 😊 Friendly, 💼 Professional, 💪 Assertive tones
-- Real-time AI rewriting via GPT-4o
 - Clean UI, full test coverage
+- MVP: Returns placeholder message (AI integration in Post-MVP)
 
 ## Setup
 
@@ -15,12 +17,6 @@ git clone https://github.com/jkahmed94/copilot-bootcamp-capstone.git
 cd copilot-bootcamp-capstone
 npm install
 ```
-
-Create `.env`:
-```bash
-GITHUB_TOKEN=your_token_here
-```
-Get token: https://github.com/settings/tokens (no scopes needed)
 
 ## Usage
 
@@ -31,8 +27,7 @@ npm test   # Run tests
 
 ## Stack
 
-- **AI**: GitHub Models GPT-4o
-- **Backend**: Node.js, Express, OpenAI SDK
+- **Backend**: Node.js, Express
 - **Frontend**: Vanilla JS
 - **Tests**: Jest
 
@@ -40,6 +35,5 @@ npm test   # Run tests
 
 1. User inputs email + selects tone
 2. Frontend POST to `/rewrite`
-3. Backend sends to GPT-4o-mini with tone prompt
-4. AI rewrites, returns result
-5. Display rewritten email
+3. Backend validates and returns placeholder message
+4. Display result (AI integration coming in Post-MVP)
