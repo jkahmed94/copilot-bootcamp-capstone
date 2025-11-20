@@ -4,9 +4,10 @@
 
 Email rewriting application with tone selection (MVP: placeholder implementation, AI integration planned for Post-MVP).
 
+
 ## Features
 
-- 😊 Friendly, 💼 Professional, 💪 Assertive tones
+- Supported tones: 😊 Friendly, 💼 Professional, 💪 Assertive, 🧢 Casual, 🏛️ Formal, 🤝 Empathetic, 🗣️ Persuasive
 - Clean UI, full test coverage
 - MVP: Returns placeholder message (AI integration in Post-MVP)
 

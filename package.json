@@ -7,7 +7,8 @@
     "start": "node backend/src/server.js",
     "test": "jest",
     "test:backend": "jest backend/tests",
-    "test:frontend": "jest frontend/tests"
+    "test:frontend": "jest frontend/tests",
+    "prepare": "husky install"
   },
   "jest": {
     "testEnvironment": "node",
@@ -25,14 +26,18 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@ai-sdk/openai": "^2.0.68",
-    "ai": "^5.0.94",
     "dotenv": "^17.2.3",
-    "express": "^5.1.0",
-    "openai": "^6.9.1"
+    "express": "^5.1.0"
   },
   "devDependencies": {
+    "husky": "^8.0.0",
     "jest": "^30.2.0",
-    "jest-environment-jsdom": "^30.2.0"
+    "jest-environment-jsdom": "^30.2.0",
+    "lint-staged": "^16.2.7"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix"
+    ]
   }
 }
